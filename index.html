@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Phillip's Home Decor — Design Your Home With Passion</title>
+<meta name="description" content="Phillip's Home Decor — interior design services in Eldoret, Kenya, from simple refreshes to full room designs." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #E7E2D6;
+    --bg-deep: #DED8C9;
+    --panel: #FAF8F2;
+    --ink: #2A2722;
+    --ink-dim: #6B665A;
+    --ink-faint: #9A9384;
+    --dust: #5C7A93;
+    --dust-soft: rgba(92,122,147,0.14);
+    --clay: #B96B4E;
+    --sage: #7C8B6E;
+    --line: rgba(42,39,34,0.14);
+    --line-soft: rgba(42,39,34,0.07);
+    --shadow: 0 14px 32px rgba(42,39,34,0.08);
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse at 85% -10%, #F3EEE0 0%, var(--bg) 48%),
+      var(--bg);
+    color: var(--ink);
+    font-family:'Manrope', sans-serif;
+    font-size:16px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,h4,.display{
+    font-family:'Instrument Serif', serif;
+    font-weight:400;
+    line-height:1.08;
+    margin:0;
+    letter-spacing:0.002em;
+  }
+  p{ margin:0; }
+  a{ color:inherit; text-decoration:none; }
+  ul{ margin:0; padding:0; list-style:none; }
+  button{ font-family:inherit; }
+  ::selection{ background: var(--dust); color:#fff; }
+  :focus-visible{ outline:2px solid var(--dust); outline-offset:3px; }
+
+  .wrap{ max-width:1160px; margin:0 auto; padding:0 clamp(20px,5vw,56px); }
+
+  .folio{
+    display:flex; align-items:center; gap:14px;
+    font-family:'Manrope', sans-serif; font-weight:600;
+    font-size:12.5px; color: var(--dust); margin-bottom:18px;
+    text-transform:uppercase; letter-spacing:0.09em;
+  }
+  .folio::after{ content:""; flex:1; height:1px; background: var(--line); }
+
+  .swatch-dot{ width:9px; height:9px; border-radius:50%; display:inline-block; flex-shrink:0; }
+
+  /* ---------- top nav ---------- */
+  header.site-nav{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background: rgba(231,226,214,0.9);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .nav-inner{
+    max-width:1160px; margin:0 auto; padding:0 clamp(20px,5vw,56px);
+    height:80px; display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{ display:flex; align-items:center; gap:12px; cursor:pointer; }
+  .mark{ display:flex; gap:3px; }
+  .mark span{ width:8px; height:22px; display:block; }
+  .brand-text{ line-height:1.2; }
+  .brand-text strong{ font-family:'Instrument Serif', serif; font-size:22px; display:block; font-style:italic; }
+  .brand-text span{ font-size:10.5px; color: var(--ink-faint); text-transform:uppercase; letter-spacing:0.08em; }
+
+  nav.links{ display:flex; gap:4px; align-items:center; }
+  nav.links button{
+    background:none; border:none; cursor:pointer;
+    color: var(--ink-dim); font-size:14px; padding:9px 16px; position:relative;
+    font-weight:500;
+    transition: color .2s ease;
+  }
+  nav.links button:hover{ color: var(--ink); }
+  nav.links button.active{ color: var(--ink); }
+  nav.links button.active::after{
+    content:""; position:absolute; left:16px; right:16px; bottom:2px; height:2px; background: var(--dust);
+  }
+  .nav-cta{ border:1px solid var(--ink) !important; color: var(--ink) !important; margin-left:10px; border-radius:999px; }
+  .nav-cta:hover{ background: var(--ink) !important; color: var(--bg) !important; }
+
+  .hamburger{
+    display:none; background:none; border:1px solid var(--line);
+    width:40px; height:40px; cursor:pointer; position:relative;
+  }
+  .hamburger span, .hamburger span::before, .hamburger span::after{
+    content:""; position:absolute; left:10px; right:10px; height:1px; background: var(--ink);
+  }
+  .hamburger span{ top:19px; }
+  .hamburger span::before{ top:-6px; }
+  .hamburger span::after{ top:6px; }
+
+  /* ---------- page shell / transitions ---------- */
+  main{ margin-top:80px; }
+  .page{ display:none; min-height:calc(100vh - 80px); padding-bottom:90px; }
+  .page.active{ display:block; }
+  .page.enter{ animation: pageIn .6s cubic-bezier(.2,.7,.2,1) both; }
+  @keyframes pageIn{
+    from{ opacity:0; transform: perspective(1200px) rotateX(3deg) translateY(20px); }
+    to{ opacity:1; transform: perspective(1200px) rotateX(0) translateY(0); }
+  }
+  @media (prefers-reduced-motion: reduce){ .page.enter{ animation:none; } html{ scroll-behavior:auto; } }
+
+  section{ padding: clamp(58px,8vw,100px) 0; }
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end; gap:24px;
+    margin-bottom:48px; border-bottom:1px solid var(--line); padding-bottom:20px;
+  }
+  .section-head h2{ font-size: clamp(32px,4.2vw,50px); font-style:italic; }
+  .section-head .idx{ font-size:12.5px; color: var(--ink-faint); white-space:nowrap; padding-bottom:8px; text-transform:uppercase; letter-spacing:0.06em; }
+
+  /* ================= HOME / HERO ================= */
+  .hero{
+    padding-top: clamp(40px,7vw,76px);
+    display:grid; grid-template-columns: 1fr 0.92fr; gap:44px; align-items:center;
+  }
+  .hero-copy h1{ font-size: clamp(38px,5.6vw,64px); font-style:italic; }
+  .hero-copy h1 em{ font-style:normal; color: var(--dust); font-family:'Manrope',sans-serif; font-weight:700; }
+  .hero-copy .pitch{ margin-top:22px; max-width:48ch; color: var(--ink-dim); font-size:16.5px; }
+  .hero-actions{ margin-top:32px; display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{
+    font-family:'Manrope', sans-serif; font-weight:600; font-size:14px; padding:14px 26px;
+    border:1px solid var(--line); cursor:pointer; background:transparent; color: var(--ink);
+    border-radius:999px;
+    transition: border-color .2s ease, transform .2s ease, background .2s ease, color .2s ease;
+  }
+  .btn-primary{ background: var(--ink); border-color: var(--ink); color: var(--bg); }
+  .btn-primary:hover{ transform: translateY(-2px); }
+  .btn-ghost:hover{ border-color: var(--dust); color: var(--dust); transform: translateY(-2px); }
+
+  .hero-stats{
+    margin-top:48px; display:grid; grid-template-columns: repeat(4,1fr);
+    border-top:1px solid var(--line); padding-top:22px; gap:10px;
+  }
+  .stat b{ display:block; font-family:'Instrument Serif',serif; font-style:italic; font-size:clamp(24px,2.8vw,30px); color: var(--dust); }
+  .stat span{ font-size:11px; color: var(--ink-faint); text-transform:uppercase; letter-spacing:0.04em; }
+
+  .swatch-stage{ position:relative; height: clamp(320px,42vw,470px); }
+  .swatch-stage canvas{ width:100%; height:100%; display:block; }
+  .swatch-caption{ position:absolute; bottom:6px; left:6px; font-size:12px; color: var(--ink-faint); font-style:italic; font-family:'Instrument Serif',serif; }
+
+  .why-strip{
+    margin-top:70px; border-top:1px solid var(--line); padding-top:40px;
+    display:grid; grid-template-columns: repeat(4,1fr); gap:24px;
+  }
+  .why-item h4{ font-size:19px; margin-bottom:8px; font-style:italic; }
+  .why-item p{ font-size:14px; color: var(--ink-dim); }
+
+  /* ================= CARD PRIMITIVES ================= */
+  .card{
+    background: var(--panel);
+    border:1px solid var(--line-soft); padding:28px; position:relative; border-radius:4px;
+    box-shadow: var(--shadow);
+    transition: transform .25s ease; will-change: transform;
+  }
+
+  .design-teaser-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap:20px; perspective:1000px; }
+  .design-teaser-grid .card{ transform: rotateX(var(--ry,0deg)) rotateY(var(--rx,0deg)); }
+  .design-teaser-grid h4{ font-size:22px; margin:14px 0 8px; font-style:italic; }
+  .design-teaser-grid p{ font-size:13.8px; color: var(--ink-dim); }
+
+  .subhead{ font-size:12.5px; color: var(--ink-faint); margin:64px 0 24px; padding-top:26px; border-top:1px solid var(--line); text-transform:uppercase; letter-spacing:0.08em; }
+
+  /* ================= OUR DESIGNS PAGE ================= */
+  .designs-intro{ max-width: 62ch; color: var(--ink-dim); font-size:16.5px; margin-bottom: 50px; }
+  .designs-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap:22px; perspective:1000px; }
+  .design-card{ transform: rotateX(var(--ry,0deg)) rotateY(var(--rx,0deg)); padding:0; overflow:hidden; }
+  .design-card .swatch-band{ height:80px; }
+  .design-card .body{ padding:24px; }
+  .design-card h4{ font-size:23px; margin-bottom:10px; font-style:italic; }
+  .design-card p{ font-size:14px; color: var(--ink-dim); }
+
+  .notice{ margin-top:40px; padding:16px 18px; border:1px solid var(--line); font-size:13px; color: var(--ink-faint); border-radius:4px; background: var(--panel); }
+
+  /* ================= CONTACT ================= */
+  .contact-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:56px; }
+  .contact-list{ margin-top:28px; }
+  .contact-list li{ display:flex; justify-content:space-between; padding:16px 0; border-bottom:1px solid var(--line); font-size:15px; gap:14px; }
+  .contact-list li span:first-child{ color: var(--ink-faint); font-size:12.5px; text-transform:uppercase; letter-spacing:0.04em; white-space:nowrap; }
+  .contact-list li a, .contact-list li span:last-child{ color: var(--ink); text-align:right; }
+  .contact-list li a:hover{ color: var(--dust); }
+
+  .field{ margin-bottom:18px; }
+  .field label{ display:block; font-size:12px; color: var(--ink-faint); margin-bottom:8px; text-transform:uppercase; letter-spacing:0.04em; }
+  .field input, .field select, .field textarea{
+    width:100%; background: var(--panel); border:1px solid var(--line); color: var(--ink);
+    padding:12px 14px; border-radius:4px; font-family:'Manrope',sans-serif; font-size:14.5px; resize:vertical;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus{ border-color: var(--dust); outline:none; }
+  .form-msg{ font-size:13px; color: var(--dust); margin-top:10px; min-height:16px; }
+
+  footer{ border-top:1px solid var(--line); padding: 46px 0 30px; }
+  .footer-grid{ display:grid; grid-template-columns: 1.3fr 1fr 1fr; gap:32px; margin-bottom:32px; }
+  .footer-grid h5{ font-family:'Instrument Serif',serif; font-style:italic; font-size:16px; color: var(--dust); margin-bottom:14px; font-weight:400; }
+  .footer-grid li{ font-size:13.5px; color: var(--ink-dim); padding:5px 0; }
+  .footer-grid a:hover{ color: var(--dust); }
+  .footer-bottom{
+    border-top:1px solid var(--line); padding-top:20px;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-size:12.5px; color: var(--ink-faint);
+  }
+  .footer-bottom a{ color: var(--ink-dim); }
+  .footer-bottom a:hover{ color: var(--dust); }
+
+  @media (max-width:900px){
+    nav.links{
+      position:fixed; top:80px; left:0; right:0; background: var(--bg);
+      border-bottom:1px solid var(--line); flex-direction:column; align-items:stretch;
+      padding:10px 20px 20px; display:none;
+    }
+    nav.links.open{ display:flex; }
+    nav.links button{ text-align:left; padding:13px 4px; border-bottom:1px solid var(--line-soft); }
+    .nav-cta{ margin:10px 0 0; text-align:center; }
+    .hamburger{ display:block; }
+
+    .hero{ grid-template-columns:1fr; }
+    .hero-stats{ grid-template-columns: repeat(2,1fr); row-gap:22px; }
+    .why-strip{ grid-template-columns: 1fr 1fr; }
+    .design-teaser-grid, .designs-grid{ grid-template-columns: 1fr 1fr; }
+    .contact-grid{ grid-template-columns:1fr; }
+    .footer-grid{ grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width:560px){
+    .why-strip, .design-teaser-grid, .designs-grid, .footer-grid{ grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <div class="brand" data-nav="home">
+      <div class="mark"><span style="background:var(--dust);"></span><span style="background:var(--clay);"></span><span style="background:var(--sage);"></span></div>
+      <div class="brand-text">
+        <strong>Phillip's Home Decor</strong>
+        <span>Eldoret, Kenya</span>
+      </div>
+    </div>
+    <nav class="links" id="navLinks">
+      <button data-nav="home" class="active">Home</button>
+      <button data-nav="designs">Our Designs</button>
+      <button data-nav="contact" class="nav-cta">Book a Consult</button>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation"><span></span></button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= HOME ================= -->
+  <section class="page active" id="page-home" data-page="home">
+    <div class="wrap">
+      <div class="hero">
+        <div class="hero-copy">
+          <p class="folio">Eldoret, Kenya</p>
+          <h1>Design your home<br>with <em>passion</em>.</h1>
+          <p class="pitch">At Phillip's Home Decor, we help turn your dream home interior into a reality — sophisticated, customized designs shaped by research and by listening closely to what our clients actually want.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" data-nav="designs">See our designs</button>
+            <button class="btn btn-ghost" data-nav="contact">Book a consultation</button>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><b>3+</b><span>Room categories</span></div>
+            <div class="stat"><b>Simple to</b><span>Complex styles</span></div>
+            <div class="stat"><b>Research-led</b><span>Design process</span></div>
+            <div class="stat"><b>Client fit</b><span>Custom to you</span></div>
+          </div>
+        </div>
+
+        <div class="swatch-stage" id="swatchStage" aria-hidden="true">
+          <canvas id="swatchCanvas"></canvas>
+          <p class="swatch-caption">Every room starts as a mood board.</p>
+        </div>
+      </div>
+
+      <div class="why-strip">
+        <div class="why-item"><h4>Research-led</h4><p>Designs shaped by client feedback, not a one-size template.</p></div>
+        <div class="why-item"><h4>Any style</h4><p>From the simplest refresh to a fully custom, complex build.</p></div>
+        <div class="why-item"><h4>Room by room</h4><p>Living rooms, kitchens and beyond — each treated on its own terms.</p></div>
+        <div class="why-item"><h4>Built around you</h4><p>Customized to your satisfaction, not a fixed catalogue.</p></div>
+      </div>
+
+      <p class="subhead">Crafted designs</p>
+      <p style="max-width:56ch; color:var(--ink-dim); font-size:15.5px; margin-bottom:30px;">From the simplest style to the most complex — we've got you covered.</p>
+      <div class="design-teaser-grid" id="teaserGrid"></div>
+    </div>
+  </section>
+
+  <!-- ================= OUR DESIGNS ================= -->
+  <section class="page" id="page-designs" data-page="designs">
+    <div class="wrap">
+      <div class="section-head"><h2>Our Designs</h2><span class="idx">Room by room</span></div>
+      <p class="designs-intro">Every space gets its own mood board before a single piece is chosen — here's where we typically start, though every project bends to fit the room you actually have.</p>
+
+      <div class="designs-grid" id="designsGrid"></div>
+
+      <p class="notice">Your original listing named "Living Rooms" (twice) and "Kitchen." We've kept both and rounded the set out with typical interior-design categories (Bedroom, Dining Room, Home Office) so the page reads as a full service list — trim or relabel these to match what you actually offer before publishing.</p>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="page" id="page-contact" data-page="contact">
+    <div class="wrap">
+      <div class="section-head"><h2>Book a Consultation</h2><span class="idx">Reach us</span></div>
+
+      <div class="contact-grid">
+        <div>
+          <p style="max-width:44ch; color:var(--ink-dim); font-size:16px;">Tell us about the room, the style you're drawn to, and roughly when you'd like to start — we'll take it from there.</p>
+
+          <ul class="contact-list">
+            <li><span>Phone</span><a href="tel:+254707385519">+254 707 385 519</a></li>
+            <li><span>Alt. phone</span><a href="tel:+254110943805">+254 110 943 805</a></li>
+            <li><span>Email</span><a href="mailto:phillipshd@outlook.com">phillipshd@outlook.com</a></li>
+            <li><span>Studio</span><span>Muscco Towers, Eldoret, Kenya</span></li>
+          </ul>
+
+          <div class="notice">Studio hours aren't listed on the original site — add them here once confirmed.</div>
+        </div>
+
+        <div>
+          <form id="contactForm">
+            <div class="field">
+              <label for="cf-name">Name</label>
+              <input id="cf-name" type="text" required placeholder="Your full name">
+            </div>
+            <div class="field">
+              <label for="cf-email">Email</label>
+              <input id="cf-email" type="email" required placeholder="you@example.com">
+            </div>
+            <div class="field">
+              <label for="cf-room">Room</label>
+              <select id="cf-room">
+                <option>Living Room</option>
+                <option>Kitchen</option>
+                <option>Bedroom</option>
+                <option>Dining Room</option>
+                <option>Home Office</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="cf-message">Message</label>
+              <textarea id="cf-message" rows="5" required placeholder="Tell us about the space and the style you're after"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send message</button>
+            <p class="form-msg" id="formMsg"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h5>Phillip's Home Decor</h5>
+        <p style="font-size:13.5px; color:var(--ink-dim); max-width:32ch;">Design your home with passion — sophisticated interiors, customized to you, in Eldoret.</p>
+      </div>
+      <div>
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="#" data-nav="home">Home</a></li>
+          <li><a href="#" data-nav="designs">Our Designs</a></li>
+          <li><a href="#" data-nav="contact">Book a Consult</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Find Us</h5>
+        <ul>
+          <li>Muscco Towers, Eldoret</li>
+          <li>+254 707 385 519</li>
+          <li>phillipshd@outlook.com</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Phillip's Home Decor.</span>
+      <span>Site by <a href="https://phillipkolale.github.io/apluswebsiteandgraphicsdevelopers/Home.html" target="_blank" rel="noopener">A+ Website &amp; Graphics Developers</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------------- Navigation ---------------- */
+  const pages = document.querySelectorAll('.page');
+  const navLinks = document.getElementById('navLinks');
+  const hamburger = document.getElementById('hamburger');
+
+  function goTo(name){
+    document.querySelectorAll('#navLinks button').forEach(b => b.classList.toggle('active', b.dataset.nav === name));
+    pages.forEach(p => {
+      if(p.dataset.page === name){
+        p.classList.add('active'); p.classList.remove('enter');
+        void p.offsetWidth; p.classList.add('enter');
+      } else { p.classList.remove('active'); }
+    });
+    navLinks.classList.remove('open');
+    window.scrollTo({top:0});
+  }
+  document.querySelectorAll('[data-nav]').forEach(btn => btn.addEventListener('click', (e) => { e.preventDefault(); goTo(btn.dataset.nav); }));
+  hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+
+  function applyTilt(card){
+    if(reduceMotion) return;
+    card.addEventListener('mousemove', (e) => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.setProperty('--rx', (x * 6).toFixed(2) + 'deg');
+      card.style.setProperty('--ry', (-y * 6).toFixed(2) + 'deg');
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.setProperty('--rx', '0deg'); card.style.setProperty('--ry', '0deg');
+    });
+  }
+
+  /* ---------------- Design categories ---------------- */
+  const designs = [
+    { name:"Living Room", color:"#5C7A93", desc:"The room that does the most work — layouts that flow, and finishes that still feel calm on a busy day." },
+    { name:"Kitchen", color:"#B96B4E", desc:"Practical first, beautiful always — storage and workflow considered alongside the finishes you'll actually see." },
+    { name:"Bedroom", color:"#7C8B6E", desc:"A space built for rest, with a palette and lighting plan that helps you switch off at the end of the day." },
+    { name:"Dining Room", color:"#9C8560", desc:"Table, lighting and seating chosen for the meals and gatherings you actually host." },
+    { name:"Home Office", color:"#7A6E8B", desc:"A focused, comfortable setup that still fits the character of the rest of your home." }
+  ];
+
+  const teaserGrid = document.getElementById('teaserGrid');
+  designs.slice(0,3).forEach(d => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `<span class="swatch-dot" style="background:${d.color}; width:14px; height:14px;"></span><h4>${d.name}</h4><p>${d.desc}</p>`;
+    teaserGrid.appendChild(card);
+    applyTilt(card);
+  });
+
+  const designsGrid = document.getElementById('designsGrid');
+  designs.forEach(d => {
+    const card = document.createElement('div');
+    card.className = 'card design-card';
+    card.innerHTML = `<div class="swatch-band" style="background:${d.color};"></div><div class="body"><h4>${d.name}</h4><p>${d.desc}</p></div>`;
+    designsGrid.appendChild(card);
+    applyTilt(card);
+  });
+
+  /* ---------------- Contact form (mailto) ---------------- */
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('cf-name').value;
+    const email = document.getElementById('cf-email').value;
+    const room = document.getElementById('cf-room').value;
+    const message = document.getElementById('cf-message').value;
+    const body = `From: ${name} (${email})\nRoom: ${room}\n\n${message}`;
+    window.location.href = `mailto:phillipshd@outlook.com?subject=${encodeURIComponent('Consultation request: ' + room)}&body=${encodeURIComponent(body)}`;
+    document.getElementById('formMsg').textContent = 'Opening your email client…';
+  });
+
+  /* ================= 3D floating swatches / mood board (Three.js hero) ================= */
+  (function(){
+    const stage = document.getElementById('swatchStage');
+    const canvas = document.getElementById('swatchCanvas');
+    if(!window.THREE || !stage || !canvas) return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(42, stage.clientWidth / stage.clientHeight, 0.1, 100);
+    camera.position.set(0, 0.3, 5.2);
+    camera.lookAt(0, 0, 0);
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(stage.clientWidth, stage.clientHeight);
+
+    const group = new THREE.Group();
+    scene.add(group);
+
+    const colors = [0x5C7A93, 0xB96B4E, 0x7C8B6E, 0xFAF8F2, 0x2A2722, 0x9C8560];
+    const swatches = [];
+    const positions3d = [
+      [-1.6, 0.6, 0], [-0.5, -0.5, 0.6], [0.7, 0.8, -0.3],
+      [1.7, -0.3, 0.3], [0.1, 0.2, 1.0], [-1.2, -0.9, -0.4]
+    ];
+
+    colors.forEach((c, i) => {
+      const geo = new THREE.PlaneGeometry(1.0, 0.68);
+      const mat = new THREE.MeshBasicMaterial({ color: c, side: THREE.DoubleSide });
+      const mesh = new THREE.Mesh(geo, mat);
+      const edges = new THREE.LineSegments(
+        new THREE.EdgesGeometry(geo),
+        new THREE.LineBasicMaterial({ color: 0x2A2722, transparent:true, opacity:0.25 })
+      );
+      mesh.add(edges);
+      const [x,y,z] = positions3d[i];
+      mesh.position.set(x, y, z);
+      mesh.rotation.set((Math.random()-0.5)*0.3, (Math.random()-0.5)*0.6, (Math.random()-0.5)*0.2);
+      group.add(mesh);
+      swatches.push({ mesh, baseY: y, speed: 0.4 + Math.random()*0.4, phase: Math.random()*Math.PI*2 });
+    });
+
+    let t = 0;
+    let raf;
+    function animate(){
+      raf = requestAnimationFrame(animate);
+      if(!reduceMotion){
+        t += 0.012;
+        swatches.forEach(s => {
+          s.mesh.position.y = s.baseY + Math.sin(t*s.speed + s.phase) * 0.12;
+          s.mesh.rotation.y += 0.0018;
+        });
+        group.rotation.y = Math.sin(t*0.2) * 0.22;
+      }
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    function onResize(){
+      const w = stage.clientWidth, h = stage.clientHeight;
+      if(!w || !h) return;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    }
+    window.addEventListener('resize', onResize);
+    onResize();
+  })();
+</script>
+</body>
+</html>
